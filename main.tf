@@ -25,7 +25,7 @@ resource "azurerm_application_insights" "sc_app_insights" {
   location            = var.location
   resource_group_name = var.resource_group_name
   application_type    = "web"
-  workspace_id        = "/subscriptions/${secrets.TF_VAR_SUBSCRIPTION_ID}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.OperationalInsights/workspaces/${var.sc_law_id}"
+  workspace_id        = "/subscriptions/${var.subscription}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.OperationalInsights/workspaces/${var.sc_law_id}"
   depends_on = [azurerm_resource_group.sc_corp_rg]
 }
 
@@ -37,8 +37,8 @@ resource "azurerm_spring_cloud_service" "sc" {
   sku_name            = "S0"
   
   network {
-    app_subnet_id                   = "/subscriptions/${secrets.TF_VAR_SUBSCRIPTION_ID}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.Network/virtualNetworks/${var.vnet_spoke_name}/subnets/${var.app_subnet_id}"
-    service_runtime_subnet_id       = "/subscriptions/${secrets.TF_VAR_SUBSCRIPTION_ID}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.Network/virtualNetworks/${var.vnet_spoke_name}/subnets/${var.service_runtime_subnet_id}"
+    app_subnet_id                   = "/subscriptions/${var.subscription}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.Network/virtualNetworks/${var.vnet_spoke_name}/subnets/${var.app_subnet_id}"
+    service_runtime_subnet_id       = "/subscriptions/${var.subscription}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.Network/virtualNetworks/${var.vnet_spoke_name}/subnets/${var.service_runtime_subnet_id}"
     cidr_ranges                     = var.sc_cidr
   }
   
@@ -57,7 +57,7 @@ resource "azurerm_spring_cloud_service" "sc" {
 resource "azurerm_monitor_diagnostic_setting" "sc_diag" {
   name                        = "monitoring"
   target_resource_id          = azurerm_spring_cloud_service.sc.id
-  log_analytics_workspace_id = "/subscriptions/${secrets.TF_VAR_SUBSCRIPTION_ID}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.OperationalInsights/workspaces/${var.sc_law_id}"
+  log_analytics_workspace_id = "/subscriptions/${var.subscription}/resourceGroups/${var.azurespringcloudvnetrg}/providers/Microsoft.OperationalInsights/workspaces/${var.sc_law_id}"
 
   log {
     category = "ApplicationConsole"
