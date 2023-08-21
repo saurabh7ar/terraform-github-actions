@@ -1,29 +1,24 @@
 
 ## General
-variable "subscription" {
-    type = string
-    description = "Azure Subscription"
-    default = ""
-}
 variable "location" {
     type        = string
-    default     = ""
+    default     = "eastus"
 } 
 variable "resource_group_name" {
     type        = string 
     description = "Name of the Resource Group where resources will be deployed"
-    default     = ""
+    default     = "rg-terraform-demo"
 }
 variable "sc_service_name" {
     type        = string
     description = "Spring Cloud Service Name"
-    default     =  ""
+    default     =  "sample-spring-app"
 }
 
 variable "app_insights_name" {
     type        = string
     description = "App Insights Name"
-    default     =  ""
+    default     =  "app-insights-terraform-demo"
 }
 
 variable "sc_cidr" {
@@ -47,27 +42,27 @@ variable "tags" {
 variable "azurespringcloudvnetrg" {
     type    = string
     description = "The name of the resource group where the existing VNET resides"
-    default = ""
+    default = "rg-terraform-demo"
 }
 
 variable "vnet_spoke_name" {
      type    = string
     description = "Name of the existing Spoke Virtual Network name(e.g. vnet-spoke)"
-    default = ""
+    default = "vnet-springapp-terraform-demo"
 }
 variable "app_subnet_id" {
     type    = string
     description = "Name of the existing SubNet to be used by Spring Cloud App Service (e.g snet-app)"
-    default = ""
+    default = "snet-apps"
 }
 variable "service_runtime_subnet_id" {
     type    = string
     description = "Name of the existing SubNet to be used by Spring Cloud runtime Service (e.g snet-runtime)"
-    default = ""
+    default = "snet-runtime"
 }
 
 variable "sc_law_id" {
     type    = string
     description = "Name of the existing Azure Log Analytics workspace to be used for storing diagnostic logs(e.g la-cb5sqq6574o2a)"
-    default = ""
+    default = "f439bdc4-a8cf-4685-9201-0ab0224a8e9f-rg-terraform-demo-EUS"
 }
