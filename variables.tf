@@ -1,5 +1,9 @@
 
 ## General
+variable "subscription" {
+    type        = string
+    default     = "eastus"
+}
 variable "location" {
     type        = string
     default     = "eastus"
