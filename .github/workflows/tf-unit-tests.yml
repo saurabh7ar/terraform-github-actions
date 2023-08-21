@@ -3,6 +3,9 @@ name: 'Terraform Unit Tests'
 on:
   push:
 
+env:
+  subscription: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
+
 jobs:
   terraform-unit-tests:
     name: 'Terraform Unit Tests'
@@ -37,9 +40,9 @@ jobs:
         framework: terraform
 
     # Upload results to GitHub Advanced Security
-    - name: Upload SARIF file
-      if: success() || failure()
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: results.sarif
-        category: checkov
+    #- name: Upload SARIF file
+    #  if: success() || failure()
+    # uses: github/codeql-action/upload-sarif@v2
+    # with:
+    #   sarif_file: results.sarif
+    #   category: checkov
